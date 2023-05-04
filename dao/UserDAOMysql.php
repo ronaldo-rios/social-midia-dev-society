@@ -17,6 +17,7 @@ class UserDAOMysql implements UserDAO
         $generated_user = new User();
         $generated_user->id = $array['id'] ?? 0;
         $generated_user->email = $array['email'] ?? '';
+        $generated_user->password = $array['password'] ?? '';
         $generated_user->name = $array['name'] ?? '';
         $generated_user->birthdate = $array['birthdate'] ?? '';
         $generated_user->city = $array['city'] ?? '';
@@ -86,6 +87,25 @@ class UserDAOMysql implements UserDAO
         $sql->bindValue(':cover', $user_generated->cover);
         $sql->bindValue(':token', $user_generated->token);
         $sql->bindValue(':id', $user_generated->id);
+        $sql->execute();
+
+        return true;
+    }
+
+    public function insert(User $user_generated)
+    {
+        $sql = $this->pdo->prepare("INSERT INTO users (
+            email, password, name, birthdate, token
+            ) VALUES (
+            :email, :password, :name, :birthdate, :token
+            )"
+        );
+
+        $sql->bindValue(':email', $user_generated->email);
+        $sql->bindValue(':password', $user_generated->password);
+        $sql->bindValue(':name', $user_generated->name);
+        $sql->bindValue(':birthdate', $user_generated->birthdate);
+        $sql->bindValue(':token', $user_generated->token);
         $sql->execute();
 
         return true;

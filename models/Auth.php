@@ -43,7 +43,7 @@ class Auth {
                 $token = md5(time().rand(0, 9999));
                 $_SESSION['token'] = $token;
                 $user->token = $token;
-                $userDao->update($user);
+                $userDao->update($user); 
 
                 return true;
 
@@ -52,6 +52,29 @@ class Auth {
         }
 
         return false;
+    }
+
+    public function emailExists($email)
+    {
+        $userDao = new UserDAOMysql($this->pdo);
+        return $userDao->findByEmail($email) ? true : false;
+    }
+
+    public function registerUser($name, $email, $password, $birthdate)
+    {
+        $token = md5(time().rand(0, 9999));
+
+        $user = new User();
+        $user->name = $name;
+        $user->email = $email;
+        $user->password = password_hash($password, PASSWORD_DEFAULT);
+        $user->birthdate = $birthdate;
+        $user->token = $token;
+
+        $userDao = new UserDAOMysql($this->pdo);
+        $userDao->insert($user);
+
+        $_SESSION['token'] = $token;
     }
 
 }
