@@ -38,7 +38,7 @@ require 'config.php';
 
             <input class="button" type="submit" value="Acessar o sistema" />
 
-            <a href="<?=$bse_url;?>/signup.php">Ainda não tem conta? Cadastre-se</a>
+            <a href="<?=$base_url;?>/signup.php">Ainda não tem conta? Cadastre-se</a>
         </form>
     </section>
 </body>

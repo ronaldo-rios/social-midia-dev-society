@@ -27,7 +27,7 @@ if($name && $email && $password & $birthdate){
 
     if($auth->emailExists($email) === false){
         $auth->registerUser($name, $email, $password, $birthdate);
-        header('Location: '.$base_url);
+        header('Location: '. $base_url);
         exit;
     } 
     else {

@@ -42,7 +42,7 @@ require 'config.php';
 
             <input class="button" type="submit" value="Cadastrar" />
 
-            <a href="<?=$bse_url;?>/login.php">Já tem conta? Faça o login</a>
+            <a href="<?=$base_url;?>/login.php">Já tem conta? Faça o login</a>
         </form>
     </section>
 
